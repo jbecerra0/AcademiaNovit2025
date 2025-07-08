@@ -9,16 +9,15 @@ jobs:
   build:
 
     runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
-
+    
     steps:
     - uses: actions/checkout@v4
-    - name: Setup dotnet ${{ matrix.dotnet-version }}
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-         dotnet-version: ${{ matrix.dotnet-version }}
+         dotnet-version: |
+           '8.0.x'
+           '9.0.x'
     - name: Display dotnet version
       run: dotnet --version
     - name: Restore dependencies
@@ -27,7 +26,7 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    
+    # debugmail.io
     - name: Send mail
       uses: dawidd6/action-send-mail@v6      
       with:                
