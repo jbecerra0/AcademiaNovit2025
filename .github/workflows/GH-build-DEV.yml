@@ -19,7 +19,10 @@ jobs:
           8.0.x
           9.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      with:
+        dotnet-version: 8.x
+        cache: true
+    - run: dotnet restore --locked-mode
     - name: Build
       run: dotnet build --no-restore
     - name: Test
