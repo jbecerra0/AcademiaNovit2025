@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:17.5
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: tivon1234
+      POSTGRES_DB: datos
+    ports:
+      - "5432:5432"
+    networks:
+      - app
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d datos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: ghcr.io/jbecerra0/academianovit:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:5000"
+    networks:
+      - app
+    environment:
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=datos;Username=admin;Password=tivon1234
+      ASPNETCORE_URLS: http://+:5000
+
+networks:
+  app:
+    driver: bridge
