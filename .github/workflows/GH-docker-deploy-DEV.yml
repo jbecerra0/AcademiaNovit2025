@@ -27,7 +27,4 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_KEY }}
         port: ${{ secrets.SERVER_PORT }}
-        script: |
-          cd ~/AcademiaNovit2025
-          docker pull ghcr.io/${{ secrets.REGISTRY_USERNAME }}/appdocker:latest
-          docker compose up -d
+        script: docker compose up -d
