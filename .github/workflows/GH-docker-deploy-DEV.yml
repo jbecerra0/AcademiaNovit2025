@@ -27,4 +27,6 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_KEY }}
         port: ${{ secrets.SERVER_PORT }}
-        script: pwd && docker compose up -d
+        script: |
+          cd ~/AcademiaNovit2025
+          docker compose up -d
