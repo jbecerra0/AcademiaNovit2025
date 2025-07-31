@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag appdocker:latest #--tag appdocker:$(date +%s)
+      run: docker build . --file Dockerfile --tag appdocker:latest
     - name: Login Registry
       run: docker login ghcr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_TOKEN }}
     - name: Build the Docker image Github name

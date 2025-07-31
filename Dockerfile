@@ -12,6 +12,6 @@ WORKDIR /publish
 
 COPY --from=build /publish/out ./
 
-EXPOSE 5000
+EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "AcademiaNovit.dll"]
