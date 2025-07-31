@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: ghcr.io/${{ secrets.REGISTRY_USERNAME }}/appdocker:latest
+    image: ghcr.io/jbecerra0/appdocker:latest
     deploy:
       replicas: 5
       restart_policy:
