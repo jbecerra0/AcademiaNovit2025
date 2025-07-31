@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    image: ghcr.io/${{ secrets.REGISTRY_USERNAME }}/appdocker:latest
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080:5000"
+    environment:
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=datos;Username=admin;Password=tivon1234
+      ASPNETCORE_URLS: http://+:5000
+    networks:
+      - app
+
+  postgres:
+    image: postgres:17.5
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: tivon1234
+      POSTGRES_DB: datos
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app
+
+volumes:
+  pgdata:
+
+networks:
+  app:
+    driver: overlay
