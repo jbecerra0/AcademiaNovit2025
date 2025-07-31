@@ -18,7 +18,7 @@ services:
       retries: 5
 
   app:
-    image: ghcr.io/jbecerra0/academianovit:latest
+    image: ghcr.io/jbecerra0/appdocker:latest
     depends_on:
       postgres:
         condition: service_healthy
